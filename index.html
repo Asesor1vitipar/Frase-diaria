@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Frase del Día</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f2f2f2;
+      text-align: center;
+    }
+    .frase {
+      font-size: 24px;
+      color: #333;
+      padding: 20px;
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="frase" id="frase">Cargando frase...</div>
+
+  <script>
+    fetch('frases.csv')
+      .then(response => response.text())
+      .then(data => {
+        const lines = data.split('\n').slice(1).map(l => l.trim()).filter(Boolean);
+        const today = new Date();
+        const start = new Date(today.getFullYear(), 0, 0);
+        const diff = today - start;
+        const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const index = dayOfYear % lines.length;
+        document.getElementById("frase").innerText = lines[index];
+      })
+      .catch(() => {
+        document.getElementById("frase").innerText = "Error al cargar las frases.";
+      });
+  </script>
+</body>
+</html>
