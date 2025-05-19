@@ -8,7 +8,7 @@
       height: 100%;
       margin: 0;
       padding: 0;
-      background: transparent;
+      background: #f4f4f4;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
@@ -16,25 +16,25 @@
     }
 
     .card {
-      background: rgba(240, 240, 240, 0.85);
-      border: 1px solid rgba(180, 180, 180, 0.4);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(200, 200, 200, 0.5);
       border-radius: 16px;
-      padding: 24px 36px;
+      padding: 30px 40px;
       max-width: 680px;
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
       text-align: center;
-      color: #333333;
-      animation: fadeIn 1.2s ease-out;
+      color: #222;
+      animation: fadeIn 1s ease-out;
     }
 
     .frase {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 500;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
@@ -50,7 +50,7 @@
     fetch('frases.txt')
       .then(response => response.text())
       .then(data => {
-        const lines = data.split('\\n').map(l => l.trim()).filter(Boolean);
+        const lines = data.split('\n').map(l => l.trim()).filter(Boolean);
 
         const ahora = new Date();
         const cambioHoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), horaCambio.hora, horaCambio.minuto);
@@ -66,7 +66,7 @@
         document.getElementById("frase").innerText = lines[index];
       })
       .catch(() => {
-        document.getElementById("frase").innerText = "Error al cargar las frases.";
+        document.getElementById("frase").innerText = "Error al cargar la frase.";
       });
   </script>
 </body>
