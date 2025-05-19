@@ -1,33 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Frase del Día</title>
   <style>
     html, body {
-      font-family: sans-serif;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1f1f1f, #2b2b2b);
+      font-family: 'Segoe UI', sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: #f2f2f2;
-      text-align: center;
-      margin: 0;
     }
+
+    .card {
+      background: #ffffff10;
+      backdrop-filter: blur(10px);
+      border: 1px solid #ffffff22;
+      border-radius: 16px;
+      padding: 30px 40px;
+      max-width: 700px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      text-align: center;
+      color: #ffffff;
+      animation: fadeIn 1.2s ease-out;
+    }
+
     .frase {
-      font-size: 24px;
-      color: #333;
-      padding: 20px;
-      max-width: 600px;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="frase" id="frase">Cargando frase...</div>
+  <div class="card">
+    <div class="frase" id="frase">Cargando frase...</div>
+  </div>
 
   <script>
-    // ⏰ CONFIGURA AQUÍ LA HORA DE CAMBIO DE FRASE
-    const horaCambio = { hora: 21, minuto: 46 }; // Cambia a la hora que tú quieras
+    const horaCambio = { hora: 2, minuto: 30 };
 
     fetch('frases.txt')
       .then(response => response.text())
@@ -36,9 +55,9 @@
 
         const ahora = new Date();
         const cambioHoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), horaCambio.hora, horaCambio.minuto);
-
-        // Si aún no hemos llegado a la hora de cambio, restamos un día
-        const fechaReferencia = ahora < cambioHoy ? new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate() - 1) : ahora;
+        const fechaReferencia = ahora < cambioHoy
+          ? new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate() - 1)
+          : ahora;
 
         const start = new Date(fechaReferencia.getFullYear(), 0, 0);
         const diff = fechaReferencia - start;
