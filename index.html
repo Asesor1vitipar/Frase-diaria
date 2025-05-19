@@ -26,10 +26,10 @@
   <div class="frase" id="frase">Cargando frase...</div>
 
   <script>
-    fetch('frases.csv')
+    fetch('frases.txt')
       .then(response => response.text())
       .then(data => {
-        const lines = data.split('\n').slice(1).map(l => l.trim()).filter(Boolean);
+        const lines = data.split('\n').map(l => l.trim()).filter(Boolean);
         const today = new Date();
         const start = new Date(today.getFullYear(), 0, 0);
         const diff = today - start;
@@ -43,3 +43,4 @@
   </script>
 </body>
 </html>
+
