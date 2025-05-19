@@ -26,7 +26,7 @@
   <div class="frase" id="frase">Cargando frase...</div>
 
   <script>
-    fetch('frases.csv')
+    fetch('https://docs.google.com/spreadsheets/d/1m9R1wXZdtkyoEqF3JXrKxdutmoDyqjsJ8JbEmRyCgG0/edit?usp=sharing')
       .then(response => response.text())
       .then(data => {
         const lines = data.split('\n').slice(1).map(l => l.trim()).filter(Boolean);
