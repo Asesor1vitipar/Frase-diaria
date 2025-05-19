@@ -26,7 +26,7 @@
   <div class="frase" id="frase">Cargando frase...</div>
 
   <script>
-    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vS5qbtrEP3AZjVRl-OI3edc0iP6rFXyjyXPl5tUV5kqR_J8paLIZl4sBLmGHadA6xpv7fV8AJWQJSs9/pub?output=ods')
+    fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vS5qbtrEP3AZjVRl-OI3edc0iP6rFXyjyXPl5tUV5kqR_J8paLIZl4sBLmGHadA6xpv7fV8AJWQJSs9/pubhtml?gid=0&single=true')
       .then(response => response.text())
       .then(data => {
         const lines = data.split('\n').slice(1).map(l => l.trim()).filter(Boolean);
