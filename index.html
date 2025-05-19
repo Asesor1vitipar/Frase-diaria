@@ -26,15 +26,25 @@
   <div class="frase" id="frase">Cargando frase...</div>
 
   <script>
+    // ⏰ CONFIGURA AQUÍ LA HORA DE CAMBIO DE FRASE
+    const horaCambio = { hora: 21, minuto: 46 }; // Cambia a la hora que tú quieras
+
     fetch('frases.txt')
       .then(response => response.text())
       .then(data => {
         const lines = data.split('\n').map(l => l.trim()).filter(Boolean);
-        const today = new Date();
-        const start = new Date(today.getFullYear(), 0, 0);
-        const diff = today - start;
+
+        const ahora = new Date();
+        const cambioHoy = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate(), horaCambio.hora, horaCambio.minuto);
+
+        // Si aún no hemos llegado a la hora de cambio, restamos un día
+        const fechaReferencia = ahora < cambioHoy ? new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate() - 1) : ahora;
+
+        const start = new Date(fechaReferencia.getFullYear(), 0, 0);
+        const diff = fechaReferencia - start;
         const dayOfYear = Math.floor(diff / (1000 * 60 * 60 * 24));
         const index = dayOfYear % lines.length;
+
         document.getElementById("frase").innerText = lines[index];
       })
       .catch(() => {
